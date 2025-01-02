@@ -7,7 +7,13 @@ import cors from "cors";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 
 app.use("/api/v1", appRouter);
 
